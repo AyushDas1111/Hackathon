@@ -1,0 +1,187 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Work-Out Plan</title>
+    <style>
+        /* Make the body scrollable and add smooth animated background */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            overflow-y: auto; /* Enable vertical scrolling */
+            background: url('workout.png') repeat-x;
+            background-size: cover;
+            animation: moveBackground 20s linear infinite;
+        }
+
+        /* Background animation moves left to right */
+        @keyframes moveBackground {
+            0% { background-position: -100vw 0; }
+            100% { background-position: 100vw 0; }
+        }
+
+        .logo {
+            position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+        }
+
+        .logo img {
+            width: 200px;
+        }
+
+        .container {
+            flex: 1;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 20px;
+            text-align: center;
+            width: 100%;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-top: 80px;
+        }
+
+        .diet-plan {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .block {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 45%;
+        }
+
+        .meal {
+            background: rgba(18, 0, 0, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .meal:hover {
+            transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .meal h2 {
+            font-size: 1.5em;
+            
+        }
+        p{
+            font-weight: bold;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            color: white;
+            text-align: center ;
+            
+
+
+        
+        }
+    </style>
+</head>
+<body>
+    <div class="logo">
+        <a href="http://127.0.0.1:8000/login/#home">   <img src="{% static 'assets/FitHub Logo bg.png' %}" alt="logo"></a>      
+    </div>
+    <div class="container">
+        <h1>Work-Out Plan</h1>
+        <div class="diet-plan">
+            <div class="block">
+                <div class="meal">
+                    <h2 style="background-color: yellow; color: black;">CHEST</h2>
+                    <p>Bench Press</p>
+                    <p>Push-Ups</p>
+                    <p>Dumbbell Flyes</p>
+                    <p>Chest Dips</p>
+                    <p>Incline Press</p>
+                </div>
+                <div class="meal">
+                    <h2 style="background-color: yellow; color: black;">BACK</h2>
+                    <p>Pull-Ups</p>
+                    <p>Bent-Over Rows</p>
+                    <p>Deadlifts</p>
+                    <p>Lat Pulldowns</p>
+                    <p>Face Pulls</p>
+                </div>
+                <div class="meal">
+                    <h2 style="background-color: yellow; color: black;">SHOULDERS</h2>
+                    <p>Overhead Press</p>
+                    <p>Lateral Raises</p>
+                    <p>Front Raises</p>
+                    <p>Arnold Press</p>
+                    <p1>Shrugs</p1>
+                </div>
+                <div class="meal">
+                    <h2 style="background-color: yellow; color: black;">ARMS(Biceps & Triceps)</h2>
+                    <p>Bicep Curls</p>
+                    <p>Hammer Curls</p>
+                    <p>Triceps Dips</p>
+                    <p>Skull Crushers</p>
+                    <p>Close-Grip Bench Press</p>
+                </div>
+            </div>
+            <div class="block">
+                <div class="meal">
+                    <h2 style="background-color: yellow; color: black;">CORE</h2>
+                    <p>BPlanks</p>
+                    <p>Russian Twists</p>
+                    <p>Hanging Leg Raises</p>
+                    <p>Bicycle Crunches</p>
+                </div>
+                <div class="meal">
+                    <h2 style="background-color: yellow; color: black;">QUARDS</h2>
+                    <p>Squats (Back, Front, Goblet)</p>
+                    <p>Lunges (Walking, Reverse, Side)</p>
+                    <p>Leg Press</p>
+                    <p>Step-Ups</p>
+                    <p>Bulgarian Split Squats</p>
+                </div>
+                <div class="meal">
+                    <h2 style="background-color: yellow; color: black;">Glutes (Butt Muscles)</h2>
+                    <p>Hip Thrusts</p>
+                    <p>Glute Bridges</p>
+                    <p>Cable Kickbacks</p>
+                    <p>Sumo Deadlifts</p>
+                    <p>Frog Pumps</p>
+                </div>
+                <div class="meal">
+                    <h2 style="background-color: yellow; color: black;">Calves
+                    </h2>
+                    <p>Standing Calf Raises</p>
+                    <p>Jump Rope</p>
+                    <p>Good Mornings</p>
+                    <p>Farmer’s Walk on Toes</p>
+                    <p>Box Jumps</p>
+                </div>
+                <div class="meal">
+                    <h2 style="background-color: yellow; color: black;">Full Lower Body Movements
+                    </h2>
+                    <p>Deadlifts</p>
+                    <p>Squats (All Variations)</p>
+                    <p>Pistol Squats</p>
+                    <p>Kettlebell Swings</p>
+                    <p>Sled Pushes</p>
+                </div>
+    
+            </div>
+        </div>
+    </div>
+</body>
+</html>

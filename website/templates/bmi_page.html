@@ -1,0 +1,190 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url("{% static 'assets/diet.jpeg' %}");
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            animation: backgroundAnimation 5s ease-in-out infinite alternate, slideBackground 3s ease-in-out forwards;
+        }
+        
+        @keyframes backgroundAnimation {
+            0% {
+                filter: brightness(1);
+            }
+            100% {
+                filter: brightness(0.8);
+            }
+        }
+        
+        @keyframes slideBackground {
+            from {
+                background-position: -100vw center;
+            }
+            to {
+                background-position: center;
+            }
+        }
+        
+        .container {
+            background: rgba(235, 231, 231, 0.2);
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.1), -10px -10px 30px rgba(255, 255, 255, 0.5);
+            text-align: center;
+            backdrop-filter: blur(20px);
+            transform: translateY(-90vh);
+            animation: slideDown 1s ease-out forwards;
+        }
+        
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100vh);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+        
+        .input-box {
+            margin: 15px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        input {
+            width: 90%;
+            padding: 10px;
+            border-radius: 10px;
+            border: none;
+            box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0.2), inset -5px -5px 10px rgba(10, 9, 9, 0.7);
+            outline: none;
+            
+            text-align: center;
+            font-size: 16px;
+            color: #0b0000;
+        }
+        button {
+            background: linear-gradient(45deg, #45c9c9, #200702);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 12px 12px 10px rgba(0, 0, 0, 0.2);
+        }
+      
+        button:hover {
+            transform: scale(1.05);
+        }
+        #result {
+            font-size: 18px;
+            margin-top: 15px;
+            font-weight: bold;
+            color: rgb(224, 253, 8);
+            background:linear-gradient(45deg, #c46ca9, #200702);
+        }
+        .logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -120%);
+    z-index: 2;
+}
+
+.logo img {
+    position:relative;
+    top:0px;
+    width: 150px;
+    height: auto;
+    background-color: #0b0000;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.bmi-logo {
+    display: block;
+    margin: 0 auto;
+    width: 200px;
+    height: auto;
+    position: relative;
+    z-index: 1;
+}
+
+.container {
+    margin-top: 120px;
+    text-align: center;
+    position: relative;
+}
+
+
+
+
+        
+
+    </style>
+</head>
+<body>
+    <body>
+        <div class="logo">
+            <a href="http://127.0.0.1:8000/login/">
+                <img src="{% static 'assets/FitHub Logo.png' %}" alt="BMI CALCULATOR" class="logo">
+            </a>
+        </div>
+        
+        <div class="container">
+            <img src="{% static 'assets/bmi-removebg-preview.png' %}" alt="BMI CALCULATOR" class="bmi-logo">
+            <div class="input-box">
+                <label for="height">Height (in cm):</label>
+                <input type="number" id="height" placeholder="Enter height in cm ">
+            </div>
+            <div class="input-box">
+                <label for="weight">Weight (in kg):</label>
+                <input type="number" id="weight" placeholder="Enter weight in kg">
+            </div>
+            <button onclick="calculateBMI()">Calculate BMI</button>
+            <p id="result"></p>
+        </div>
+    </body>
+    
+    <script>
+        function calculateBMI() {
+            let height = document.getElementById("height").value / 100;
+            let weight = document.getElementById("weight").value;
+            if (height > 0 && weight > 0) {
+                let bmi = (weight / (height * height)).toFixed(2);
+                let category = "";
+                if (bmi < 18.5) {
+                    category = "Underweight";
+                } else if (bmi >= 18.5 && bmi < 24.9) {
+                    category = "Normal weight";
+                } else if (bmi >= 25 && bmi < 29.9) {
+                    category = "Overweight";
+                } else {
+                    category = "Obese";
+                }
+                document.getElementById("result").innerHTML = `Your BMI is ${bmi} (${category})`;
+            } else {
+                document.getElementById("result").innerHTML = "Please enter valid values";
+            }
+        }
+    </script>
+</body>
+</html>

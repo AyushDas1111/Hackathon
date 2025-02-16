@@ -1,0 +1,270 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calorie Calculator</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+ /* Background Images */
+.bg2, .bg3 {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 50vw;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+    opacity: 0.7;
+    animation: slideIn 1.5s ease-out forwards;
+}
+
+.bg2 {
+    left: -50vw;
+    background-image: url("{% static 'assets/calories-counting.jpg' %}");
+    animation-name: slideInLeft;
+}
+
+.bg3 {
+    right: -50vw;
+    background-image: url("{% static 'assets/calorie calculate 2.jpg' %}");
+    animation-name: slideInRight;
+}
+
+/* Animations */
+@keyframes slideInLeft {
+    from {
+        left: -50vw;
+    }
+    to {
+        left: 0;
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        right: -50vw;
+    }
+    to {
+        right: 0;
+    }
+}
+
+        /* Responsive Calculator Container */
+        .container {
+    max-width: 900px; /* Reduced width */
+    width: 40%; /* Adjusted proportionally */
+    background-color: rgba(255, 255, 255, 0.9); 
+    padding: 5px; /* Less padding for a more compact look */
+    border-radius: 10px; /* Slightly sharper corners */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    position: relative;
+    z-index: 1;
+    animation: slideDown 1.5s ease-out forwards;
+    max-height: 80vh; /* Set a max height */
+    overflow-y: auto; /* Enables vertical scrolling */
+}
+
+/* Style scrollbar (optional) */
+.container::-webkit-scrollbar {
+    width: 15px;
+}
+
+.container::-webkit-scrollbar-thumb {
+    background-color: #28a745;
+    border-radius: 4px;
+}
+
+.container::-webkit-scrollbar-track {
+    background: #f8f9fa;
+}
+
+
+/* Improve Input Fields */
+input, select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 4px;
+    border-radius: 8px;
+    border: 1px solid #aaa;
+    font-size: 14px;
+}
+
+/* Enhance Button */
+button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 12px;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: #1e7e34;
+    transform: scale(1.05);
+}
+
+/* Display results with better visibility */
+.result {
+    margin-top: 15px;
+    padding: 12px;
+    background-color: #f8f9fa;
+    border-left: 5px solid #28a745;
+    font-weight: bold;
+    border-radius: 8px;
+    display: none;
+}
+
+/* Logo Styling */
+.logo {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    z-index: 1000;
+}
+
+.logo img {
+    width: 140px; /* Adjusted size */
+    height: auto;
+    transition: transform 0.3s ease-in-out;
+}
+
+.logo img:hover {
+    transform: scale(1.1);
+}
+ </style>
+</head>
+<body>
+    <!-- Background Layers -->
+    <div class="bg2"></div>
+    <div class="bg3"></div>
+
+    <div class="logo">
+        <a href="http://127.0.0.1:8000/login/#home">
+            <img src="{% static 'assets/FitHub Logo.png' %}" alt="logo1"></a>
+        </a>
+    </div>
+
+
+
+    <!-- Calorie Calculator Form -->
+    <div class="container">
+        <h2 class="text-success fw-bold">Calorie Calculator</h2>
+        <label for="weight">Weight (kg):</label>
+        <input type="number" id="weight" placeholder="Enter your weight">
+
+        <label for="height">Height:</label>
+        <div class="height-group d-flex gap-2">
+            <input type="number" id="height-feet" placeholder="Feet" class="form-control">
+            <input type="number" id="height-inches" placeholder="Inches" class="form-control">
+        </div>
+
+        <label for="age">Age (years):</label>
+        <input type="number" id="age" placeholder="Enter your age">
+
+        <label for="sex">Sex:</label>
+        <select id="sex">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+        </select>
+
+        <label for="activity">Activity Level:</label>
+        <select id="activity">
+            <option value="1.2">Sedentary</option>
+            <option value="1.375">Lightly active</option>
+            <option value="1.55">Moderately active</option>
+            <option value="1.725">Very active</option>
+            <option value="1.9">Extra active</option>
+        </select>
+
+        <label for="goal">Goal:</label>
+        <select id="goal">
+            <option value="maintain">Maintain Bodyweight</option>
+            <option value="lose">Weight Loss</option>
+            <option value="gain">Weight Gain</option>
+        </select>
+
+        <div id="goal-details" style="display: none;">
+            <label for="goal-weight">Goal Bodyweight (kg):</label>
+            <input type="number" id="goal-weight" placeholder="Enter your goal bodyweight">
+
+            <label for="months">Timeframe (months):</label>
+            <select id="months">
+                <option value="3">3 months</option>
+                <option value="4">4 months</option>
+                <option value="5">5 months</option>
+            </select>
+        </div>
+
+        <button id="calculate-calories" class="btn btn-success w-100">Calculate Calories</button>
+
+        <div id="maintenance-results" class="result"></div>
+        <div id="deficit-results" class="result"></div>
+        <div id="surplus-results" class="result"></div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#goal').change(function() {
+                if ($('#goal').val() === 'maintain') {
+                    $('#goal-details').hide();
+                } else {
+                    $('#goal-details').show();
+                }
+            });
+
+            $('#calculate-calories').click(function() {
+                const weight = parseFloat($('#weight').val());
+                const heightFeet = parseFloat($('#height-feet').val());
+                const heightInches = parseFloat($('#height-inches').val());
+                const age = parseInt($('#age').val());
+                const sex = $('#sex').val();
+                const activity = parseFloat($('#activity').val());
+                const goal = $('#goal').val();
+                const goalWeight = parseFloat($('#goal-weight').val());
+                const months = parseInt($('#months').val());
+                const height = (heightFeet * 30.48) + (heightInches * 2.54);
+
+                let bmr = (sex === 'male') 
+                    ? (10 * weight + 6.25 * height - 5 * age + 5)
+                    : (10 * weight + 6.25 * height - 5 * age - 161);
+
+                const maintenanceCalories = bmr * activity;
+                const weightDifference = goalWeight - weight;
+                const totalCalorieChange = weightDifference * 7700;
+                const dailyCalorieChange = totalCalorieChange / (months * 30);
+
+                if (goal === 'maintain') {
+                    $('#maintenance-results').html(`<p>Maintenance Calories: ${Math.round(maintenanceCalories)} kcal/day</p>`).show();
+                    $('#deficit-results, #surplus-results').hide();
+                } else if (goal === 'lose') {
+                    const deficitCalories = maintenanceCalories + dailyCalorieChange;
+                    $('#deficit-results').html(`<p>Calorie Deficit Goal: ${Math.round(deficitCalories)} kcal/day</p>`).show();
+                    $('#maintenance-results, #surplus-results').hide();
+                } else if (goal === 'gain') {
+                    const surplusCalories = maintenanceCalories + Math.abs(dailyCalorieChange);
+                    $('#surplus-results').html(`<p>Calorie Surplus Goal: ${Math.round(surplusCalories)} kcal/day</p>`).show();
+                    $('#maintenance-results, #deficit-results').hide();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

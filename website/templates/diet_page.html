@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthy Diet Plan</title>
+    <style>
+        /* Make the body scrollable and add smooth animated background */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            overflow-y: auto; /* Enable vertical scrolling */
+            background: url('https://images.unsplash.com/photo-1512621776951-a57141f2eefd') repeat-x;
+            background-size: cover;
+            animation: moveBackground 20s linear infinite;
+        }
+
+        /* Background animation moves left to right */
+        @keyframes moveBackground {
+            0% { background-position: -100vw 0; }
+            100% { background-position: 100vw 0; }
+        }
+
+        .logo {
+            position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+        }
+
+        .logo img {
+            width: 200px;
+        }
+
+        .container {
+            flex: 1;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 20px;
+            text-align: center;
+            width: 100%;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-top: 80px;
+        }
+
+        .diet-plan {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .block {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 45%;
+        }
+
+        .meal {
+            background: rgba(18, 0, 0, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .meal:hover {
+            transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .meal h2 {
+            font-size: 1.5em;
+            
+        }
+        p{
+            font-weight: bold;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            color: white;
+            text-align: center ;
+            
+
+
+        
+        }
+    </style>
+</head>
+<body>
+    <div class="logo">
+      <a href="index.html">  <img src="FitHub Logo.png " alt="logo"></a>
+    </div>
+    <div class="container">
+        <h1>Healthy Diet Charts</h1>
+        <div class="diet-plan">
+            <div class="block">
+                <div class="meal">
+                    <h2 style="background-color: yellow; color: black;">Monday</h2>
+                    <p>Breakfast: Oatmeal with fruits and nuts</p>
+                    <p>Snack: Handful of almonds</p>
+                    <p>Lunch: Grilled chicken with quinoa and vegetables</p>
+                    <p>Dinner: Salmon with steamed broccoli and brown rice</p>
+                </div>
+                <div class="meal">
+                    <h2 style="background-color: yellow; color: black;">Tuesday</h2>
+                    <p>Breakfast: Scrambled eggs with whole-grain toast</p>
+                    <p>Snack: Apple slices with peanut butter</p>
+                    <p>Lunch: Turkey wrap with spinach and avocado</p>
+                    <p>Dinner: Stir-fried tofu with mixed vegetables</p>
+                </div>
+                <div class="meal">
+                    <h2 style="background-color: yellow; color: black;">Wednesday</h2>
+                    <p>Breakfast: Smoothie with banana, berries, and yogurt</p>
+                    <p>Snack: Greek yogurt with honey</p>
+                    <p>Lunch: Quinoa salad with chickpeas and feta</p>
+                    <p>Dinner: Baked cod with roasted sweet potatoes</p>
+                </div>
+                <div class="meal">
+                    <h2 style="background-color: yellow; color: black;">Thursday</h2>
+                    <p>Breakfast: Greek yogurt with honey and almonds</p>
+                    <p>Snack: Carrot sticks with hummus</p>
+                    <p>Lunch: Grilled salmon with steamed asparagus</p>
+                    <p>Dinner: Lentil soup with whole grain bread</p>
+                </div>
+            </div>
+            <div class="block">
+                <div class="meal">
+                    <h2 style="background-color: yellow; color: black;">Friday</h2>
+                    <p>Breakfast: Whole-grain pancakes with berries</p>
+                    <p>Snack: Cottage cheese with pineapple</p>
+                    <p>Lunch: Chicken Caesar salad</p>
+                    <p>Dinner: Grilled shrimp with couscous</p>
+                </div>
+                <div class="meal">
+                    <h2 style="background-color: yellow; color: black;">Saturday</h2>
+                    <p>Breakfast: Scrambled eggs with avocado</p>
+                    <p>Snack: Mixed nuts</p>
+                    <p>Lunch: Veggie wrap with hummus</p>
+                    <p>Dinner: Roasted chicken with quinoa</p>
+                </div>
+                <div class="meal">
+                    <h2 style="background-color: yellow; color: black;">Sunday</h2>
+                    <p>Breakfast: Smoothie bowl with granola</p>
+                    <p>Snack: Dark chocolate and walnuts</p>
+                    <p>Lunch: Tuna salad with mixed greens</p>
+                    <p>Dinner: Stuffed bell peppers with lean ground beef</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

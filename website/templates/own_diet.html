@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .center-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        /* Logo Styling */
+        .logo {
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            z-index: 1000;
+        }
+
+        .logo img {
+            width: 100px; /* Adjusted size */
+            height: auto;
+            transition: transform 0.3s ease-in-out;
+            border-radius: 50%;
+        }
+
+        .logo img:hover {
+            transform: scale(1.1);
+        }
+
+        body {
+            background: url('diet.png') no-repeat center center/cover;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            animation: moveBackground 10s linear infinite;
+        }
+
+        /* Header Styling */
+        h3 {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color:white;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Table Styling */
+        .list-group-item {
+            background: rgba(255, 255, 255, 0.8);
+            border: none;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-light">
+    <div class="logo">
+        <a href="http://127.0.0.1:8000/login/#home">
+            <img src="FitHub Logo.png" alt="logo1">
+        </a>
+    </div>
+    <div class="container center-container">
+        <div class="text-center w-50">
+            <h3 class="mb-4">Make Your Own Diet-Plan</h3>
+            <ul class="list-group">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Choose Your Nutritionist
+                    <select class="form-select w-50">
+                        <option>Select</option>
+                        <option>Nutritionist A</option>
+                        <option>Nutritionist B</option>
+                        <option>Nutritionist C</option>
+                    </select>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Make Your Own Meals
+                    <button class="btn btn-primary btn-sm">Customize</button>
+                </li>
+                <li class="list-group-item">
+                    Workout Intensity
+                    <select class="form-select mt-2 w-50">
+                        <option>Active</option>
+                        <option>Intermediate</option>
+                        <option>Sedentary</option>
+                    </select>
+                </li>
+                <li class="list-group-item">
+                    Food Preferences
+                    <select class="form-select mt-2 w-50">
+                        <option>Veg</option>
+                        <option>Non-Veg</option>
+                    </select>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Budget
+                    <input type="number" class="form-control w-50" placeholder="Set Budget">
+                </li>
+                <li class="list-group-item">
+                    Lifestyle
+                    <select class="form-select mt-2 w-50">
+                        <option>Student</option>
+                        <option>Body Builder</option>
+                        <option>Corporate Officer</option>
+                    </select>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

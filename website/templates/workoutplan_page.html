@@ -1,0 +1,240 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workout Plan</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background: url('workoutpagebg.jpg') no-repeat center center/cover;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            animation: moveBackground 10s linear infinite;
+        }
+        
+        .container {
+            background: rgba(224, 224, 224, 0.2); /* Semi-transparent */
+            border-radius: 20px;
+            box-shadow: 10px 10px 30px rgba(190, 190, 190, 0.5), 
+                        -10px -10px 30px rgba(255, 255, 255, 0.5);
+            padding: 20px;
+            text-align: center;
+            width: 50%;
+            backdrop-filter: blur(10px); /* Glass effect */
+        }
+        
+        /* Bold headers */
+        label {
+            font-weight: bold;
+            color: #333;
+        }
+        
+        select, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 10px;
+            font-weight: bold;
+            box-shadow: inset 5px 5px 10px rgba(190, 190, 190, 0.5), 
+                        inset -5px -5px 10px rgba(255, 255, 255, 0.5);
+        }
+        
+        button {
+            cursor: pointer;
+            background: #008CBA;
+            color: white;
+            font-size: 16px;
+            transition: all 0.3s ease-in-out;
+        }
+        
+        button:hover {
+            background: #005f73;
+            transform: scale(1.05);
+        }
+        
+        /* Transparent table design */
+        .todo-table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+            background: rgba(255, 255, 255, 0.1); /* Transparent effect */
+            backdrop-filter: blur(8px);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .todo-table th, .todo-table td {
+            padding: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+        }
+        
+        /* Table Headers */
+        .todo-table th {
+            font-weight: bold;
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Logo Styling */
+.logo {
+    position: absolute;
+    top: .5px;
+    left: .5px;
+    z-index: 1000;
+}
+
+.logo img {
+    width: 200px; /* Adjusted size */
+    height: auto;
+    transition: transform 0.3s ease-in-out;
+}
+
+.logo img:hover {
+    transform: scale(1.1);
+}
+.logo {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    z-index: 1000;
+}
+
+.logo img {
+    width: 140px; /* Adjusted size */
+    height: auto;
+    transition: transform 0.3s ease-in-out;
+}
+
+.logo img:hover {
+    transform: scale(1.1);
+}
+        
+
+
+    </style>
+</head>
+<body>
+    <div class="logo">
+        <a href="http://127.0.0.1:8000/login/#home">
+            <img src="{% static 'assets/FitHub Logo bg.png' %}" alt="logo"></a>      
+    </div>   
+    <div class="container">
+        <h1>Do Your Own Work Out Plan</h1>
+        <div class="todo-form">
+            <label>Choose Your Coach:</label>
+            <select id="coach">
+                <option>Coach A</option>
+                <option>Coach B</option>
+                <option>Coach C</option>
+            </select>
+
+            <label>Workout Plan:</label>
+            <select id="workoutPlan">
+                <option>Home Workout Plan</option>
+                <option>Gym Workout Plan</option>
+            </select>
+
+            <label>Fitness Goals:</label>
+            <select id="fitnessGoals">
+                <option>Weight Gain</option>
+                <option>Weight Loss</option>
+            </select>
+
+            <label>Workout Intensity:</label>
+            <select id="workoutIntensity">
+                <option>Active</option>
+                <option>Moderate</option>
+                <option>Sedentary</option>
+            </select>
+
+            <label>Best Time For My Workout:</label>
+            <select id="workoutTime">
+                <option>Morning</option>
+                <option>Afternoon</option>
+                <option>Evening</option>
+            </select>
+
+            <label>Make My Workout Plan:</label>
+            <select id="bodyPart" onchange="showBodyOptions()">
+                <option value="">Select</option>
+                <option value="upper">Upper Body</option>
+                <option value="lower">Lower Body</option>
+            </select>
+
+            <div id="upperBodyOptions" class="hidden">
+                <label>Select Upper Body Parts:</label>
+                <input type="checkbox" value="Chest"> Chest
+                <input type="checkbox" value="Shoulders"> Shoulders
+                <input type="checkbox" value="Arms"> Arms
+                <input type="checkbox" value="Back"> Back
+            </div>
+            
+            <div id="lowerBodyOptions" class="hidden">
+                <label>Select Lower Body Parts:</label>
+                <input type="checkbox" value="Legs"> Legs
+                <input type="checkbox" value="Glutes"> Glutes
+                <input type="checkbox" value="Calves"> Calves
+            </div>
+
+            <button onclick="addTask()">Add to List</button>
+        </div>
+
+        <table class="todo-table">
+            <thead>
+                <tr>
+                    <th>Coach</th>
+                    <th>Workout Plan</th>
+                    <th>Fitness Goal</th>
+                    <th>Intensity</th>
+                    <th>Workout Time</th>
+                    <th>Workout Parts</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="todoList"></tbody>
+        </table>
+    </div>
+
+    <script>
+        function showBodyOptions() {
+            document.getElementById('upperBodyOptions').classList.add('hidden');
+            document.getElementById('lowerBodyOptions').classList.add('hidden');
+            
+            const selectedValue = document.getElementById('bodyPart').value;
+            if (selectedValue === 'upper') {
+                document.getElementById('upperBodyOptions').classList.remove('hidden');
+            } else if (selectedValue === 'lower') {
+                document.getElementById('lowerBodyOptions').classList.remove('hidden');
+            }
+        }
+        
+        function addTask() {
+            const coach = document.getElementById('coach').value;
+            const workoutPlan = document.getElementById('workoutPlan').value;
+            const fitnessGoals = document.getElementById('fitnessGoals').value;
+            const workoutIntensity = document.getElementById('workoutIntensity').value;
+            const workoutTime = document.getElementById('workoutTime').value;
+            
+            let workoutParts = [];
+            document.querySelectorAll('#upperBodyOptions input:checked, #lowerBodyOptions input:checked').forEach(checkbox => {
+                workoutParts.push(checkbox.value);
+            });
+
+            const table = document.getElementById('todoList');
+            const row = table.insertRow();
+            row.innerHTML = `<td>${coach}</td><td>${workoutPlan}</td><td>${fitnessGoals}</td><td>${workoutIntensity}</td><td>${workoutTime}</td><td>${workoutParts.join(', ')}</td><td><button onclick="deleteTask(this)">Remove</button></td>`;
+        }
+        
+        function deleteTask(button) {
+            button.parentElement.parentElement.remove();
+        }
+    </script>
+</body>
+</html>
